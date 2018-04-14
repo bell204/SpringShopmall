@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Commentary">
+	<resultMap id="commentaryResultSet" type="Commentary">
+		 
+		 <!--  VO // DB -->
+		<id property="comment_no" column="COMMENT_NO"/>
+		<result property="comment_content" column="COMMENT_CONTENT"/>
+		<result property="notice_no" column="NOTICE_NO"/>
+		<result property="tree_no" column="TREE_NO"/>
+		<result property="user_no" column="USER_NO"/>
+	
+	</resultMap>
+  
+ 	<select id="selectCommentary" resultMap="commentaryResultSet" parameterType="Commentary">
+		SELECT * 
+		FROM Commentary 
+	</select>
+ 
+	<insert id="insertCommentary">
+      INSERT INTO COMMENTARY (COMMENT_NO, COMMENT_CONTENT)
+      VALUES(SEQ_CNO.NEXTVAL, #{comment_content})
+   </insert>
+   
+	 
+	</mapper>

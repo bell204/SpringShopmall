@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Notice">
+	<resultMap id="noticeResultSet" type="Notice">
+		<id property="NOTICE_NO" column="NOTICE_NO"/>
+		<result property="USER_NO" column="USER_NO"/>
+		<result property="NOTICE_TITLE" column="NOTICE_TITLE"/>
+		<result property="NOTICE_CONTENT" column="NOTICE_CONTENT"/>
+		<result property="NOTICE_DATE" column="NOTICE_DATE"/>
+		<result property="NOTICE_PWD" column="NOTICE_PWD"/>
+	</resultMap>
+ 
+
+	<insert id="insertNotice">   	
+      INSERT INTO NOTICE (NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_PWD)
+      VALUES(SEQ_NOTICE.NEXTVAL, #{NOTICE_TITLE}, #{NOTICE_CONTENT}, SYSDATE, #{NOTICE_PWD})
+   </insert>
+  
+ 	<select id="selectNotice" resultMap="noticeResultSet" parameterType="Notice">
+		SELECT * FROM NOTICE
+		ORDER BY NOTICE_NO DESC 	
+	</select>
+ 
+ 
+	 <select id="selectComparePassword" resultMap="noticeResultSet" parameterType="Notice">
+			SELECT * 
+			FROM NOTICE 
+			WHERE NOTICE_PWD=#{NOTICE_PWD} 
+	</select>
+	 
+   
+ 	<select id="searchResultListCount" resultType="_int">
+			SELECT COUNT(*) 
+			FROM NOTICE 
+			<if test="title !=null">
+				WHERE NOTICE_TITLE LIKE '%' || #{title} || '%'
+			</if>
+			<if test="content !=null">
+				WHERE NOTICE_CONTENT LIKE '%' || #{content} || '%'
+			</if>
+	</select>
+	
+	 	<select id="selectSearchResultList" resultMap="noticeResultSet" parameterType="Notice">
+			SELECT * 
+			FROM NOTICE 
+			<choose>
+				<when test="title != null">
+				WHERE NOTICE_TITLE LIKE '%' || #{title} || '%'
+				</when>
+				
+				<otherwise>
+				WHERE NOTICE_CONTENT LIKE '%' || #{content} || '%'
+				</otherwise>
+			</choose>
+			ORDER BY NOTICE_NO DESC 
+	</select>
+	 
+	 <select id="selectListCount" resultType="_int">
+			SELECT COUNT(*) 
+			FROM NOTICE 
+	</select>
+	
+	 
+	 <select id="recoverSelectNotice" resultMap="noticeResultSet" parameterType="Notice">
+			SELECT * 
+			FROM NOTICE 
+			ORDER BY NOTICE_NO DESC 
+	</select>
+	
+	<select id="helpDetailSelectList" resultMap="noticeResultSet" parameterType="Notice">
+			SELECT * 
+			FROM NOTICE 
+			WHERE NOTICE_NO=#{NOTICE_NO} 
+	</select>
+	
+ 
+ 
+ 
+	</mapper>
