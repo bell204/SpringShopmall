@@ -28,6 +28,7 @@
 			SELECT * 
 			FROM NOTICE 
 			WHERE NOTICE_PWD=#{NOTICE_PWD} 
+			AND NOTICE_NO=#{NOTICE_NO}
 	</select>
 	 
    

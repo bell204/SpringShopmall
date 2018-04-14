@@ -1,27 +1,22 @@
 package com.kh.forest.helpcenter.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.kh.forest.helpcenter.model.service.HelpService;
+import com.kh.forest.helpcenter.model.service.sha512;
 import com.kh.forest.helpcenter.model.vo.Commentary;
 import com.kh.forest.helpcenter.model.vo.Notice;
 import com.kh.forest.helpcenter.model.vo.PageInfo;
@@ -32,11 +27,15 @@ public class helpCenter {
 
 	@Autowired
 	private HelpService hs;
-
+ 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+ 
+	@Autowired
+	private sha512 sha512;
 
-	// 댓글, 암호, 파일저장만 하면 됨.
+	
+	// 댓글, 회원 등록시 다 유효성 검사, 에러 및 트랜잭션 처리만 하면끝 (AOP)
 	
 	// 1 메인 로딩 (get) (매개변수 x) // 헬프센터 메인은 디비에서 가져올 것 없음. 완료
 	@RequestMapping(value = "helpCenter.help", method = RequestMethod.GET)
@@ -66,72 +65,32 @@ public class helpCenter {
 		return mv;
 	}
 
-	// 파일 디비저장 해야 하네 ( )1
-
-	// 3 문의 등록 폼 제출 & 문의 등록 리스트 호출(post) // 인서트와 셀렉트
+	// 3 문의 등록 폼 제출 & 리다이렉트하여 문의 등록 리스트 호출(post) // 인서트와 셀렉트 따로
 	@RequestMapping(value = "PersonalInquiryList.help", method = RequestMethod.POST)
-	public ModelAndView PersonalInquiryList(String NOTICE_TITLE, String NOTICE_CONTENT, String NOTICE_PWD,
-			@RequestParam(name = "photo", required = false) MultipartFile photo, HttpServletRequest request,
-			ModelAndView mv, Notice notice) {
-
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String filePath = root + "\\uploadFiles";
-
+	public String PersonalInquiryList(String NOTICE_TITLE, String NOTICE_CONTENT, String NOTICE_PWD, 
+			HttpServletRequest request, Notice notice) {
+ 
 		try {
-			photo.transferTo(new File(filePath + "\\" + photo.getOriginalFilename()));
 			System.out.println(NOTICE_TITLE);
 			System.out.println(NOTICE_CONTENT);
 			System.out.println(NOTICE_PWD);
 
-			notice.setNOTICE_PWD(passwordEncoder.encode(NOTICE_PWD));
+			notice.setNOTICE_PWD(sha512.encryptSHA512(NOTICE_PWD));
+ 
+			 
 			notice.setNOTICE_TITLE(NOTICE_TITLE);
 			notice.setNOTICE_CONTENT(NOTICE_CONTENT);
 
-			/// 받아온 파라미터 객체에 넣는 것 끝.
-
-			// 페이징 부분 변수 선언
-			int currentPage;
-			int limit;
-			int maxPage;
-			int startPage;
-			int endPage;
-
-			// 초기값 대입
-			currentPage = 1;
-			limit = 10;
-
-			if (request.getParameter("currentPage") != null) {
-				currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			}
-
-			int listCount;
-
-			// 검색 선택 조건 객체를 매개변수로
-			// count를 리턴받아야함
-			listCount = hs.getHelpListCount();
-			maxPage = (int) ((double) listCount / limit + 0.9);
-			startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
-			endPage = startPage + limit - 1;
-
-			if (maxPage < endPage) {
-				endPage = maxPage;
-			}
-
-			// pageInfo 객체에 페이징에 필요한 변수들 다 저장.
-
-			PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-
-			ArrayList<Notice> list = hs.insertHelp(notice, pi);
-
-			mv.addObject("list", list);
-			mv.addObject("pi", pi);
-
-			mv.setViewName("/PersonalInquiryList");
+   
+			int result = hs.insertHelp(notice);
+   
+			// 리다이렉트를 쓰면 되니까 한번에 한 동작씩만 하게 하면 됨.
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return mv;
+		
+		return "redirect:InquiryList.help";
 
 	}
 
@@ -205,7 +164,7 @@ public class helpCenter {
 		return mv;
 	}
 
-	// 6 문의 등록 상세 페이지에서 댓글(post) (ajax) ( ) 한줄씩 나오게 수정(댓글 깊이 만들기)
+	// 6 문의 등록 상세 페이지에서 댓글(post) (ajax) ( ) 한줄씩 나오게 수정(댓글 깊이 만들기) 1
 	@RequestMapping(value = "Reply.help", method = RequestMethod.POST)
 	public void ReplyHelp(ModelAndView mv, String ReplyHelp, Commentary reply, HttpServletResponse response) {
 
@@ -295,38 +254,33 @@ public class helpCenter {
 	//암호 일치 x면 암호가 일치하지 않습니다 alert 뜨고 다시
  
 
-	@RequestMapping(value = "InquiryDetail.help", method = RequestMethod.POST)
-	public void comparePassword(String NOTICE_PWD, Notice notice, HttpServletResponse response) {
+	@RequestMapping(value = "comparePassword.help", method = RequestMethod.POST)
+	public void comparePassword(String NOTICE_PWD, String NOTICE_NO, Notice notice, HttpServletResponse response) {
 
 		try {
-			System.out.println(NOTICE_PWD);
-
-			String encodePwd = passwordEncoder.encode(NOTICE_PWD);
-
+			 
+			sha512 sha512 =new sha512(); 
+			
+			String encodePwd=sha512.encryptSHA512(NOTICE_PWD);
+					
+			System.out.println(encodePwd);
+			System.out.println(NOTICE_NO);
 			notice.setNOTICE_PWD(encodePwd);
+			notice.setNOTICE_NO(NOTICE_NO);
 			notice = hs.comparePassword(notice);
-
-			// //비밀번호 일치
-			// if(passwordEncoder.matches(NOTICE_PWD, encodePwd)){
-			// System.out.println(encodePwd);
-			//
-			// // 비밀번호 불일치
-			// }else{
-			// ;
-			//
-			// }
-
+			
+			String passwordCheck=notice.getNOTICE_CONTENT();
+			
 			System.out.println(notice);
 
 			if (notice != null) {
+				String check="암호가 맞습니다.";
 				ObjectMapper mapper = new ObjectMapper();
-				response.getWriter().print(mapper.writeValueAsString(notice));
+				response.getWriter().print(mapper.writeValueAsString(passwordCheck));
 
 			}
 
-			System.out.println("암호화" + notice);
 
-			// 맵형식
 
 			// 에러 처리를 안 해서 그렇구나.
 
@@ -336,7 +290,7 @@ public class helpCenter {
 
 	}
 
-	// 11 문의 목록으로 돌아갈 때 // 전체 셀렉트 (페이징 처리 반복 안 되게 하는 방법 없나? )
+	// 11 문의 목록으로 돌아갈 때 // 전체 셀렉트
 	@RequestMapping(value = "InquiryList.help", method = RequestMethod.GET)
 	public ModelAndView InquiryList(ModelAndView mv, HttpServletRequest request) {
 
@@ -374,7 +328,7 @@ public class helpCenter {
 			// pageInfo 객체에 페이징에 필요한 변수들 다 저장.
 
 			PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-
+  
 			ArrayList<Notice> list = hs.recoverHelpList(pi);
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);

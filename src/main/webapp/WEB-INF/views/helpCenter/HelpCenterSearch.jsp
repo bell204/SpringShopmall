@@ -139,9 +139,11 @@ margin-bottom: 50px;
 				}).mouseout(function(){
 					$(this).parents("tr").css({"background":"white"});
 				}).click(function(){
-					var bid = $(this).parents().children("td").eq(0).text();
-					console.log(bid);
-					location.href="PasswordModal.help";
+					
+					var NOTICE_NO = $(this).parents().children("td").eq(0).text();
+					console.log(NOTICE_NO);
+					location.href="InquiryDetail.help?NOTICE_NO="+NOTICE_NO;
+					 
 				});
 			});
 		</script>

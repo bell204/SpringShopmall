@@ -17,13 +17,15 @@ public interface HelpService {
 
 	int getHelpListCount();
 
-	ArrayList<Notice> insertHelp(Notice notice, PageInfo pi);
+	//ArrayList<Notice> insertHelp(Notice notice, PageInfo pi);
 
 	ArrayList<Notice> recoverHelpList(PageInfo pi);
 
 	ArrayList<Notice> helpDetailSelectList(Notice notice);
 
 	Notice comparePassword(Notice notice);
+
+	int insertHelp(Notice notice);
 
 
 }

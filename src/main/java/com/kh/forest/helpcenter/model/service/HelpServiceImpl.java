@@ -3,8 +3,11 @@ package com.kh.forest.helpcenter.model.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.forest.helpcenter.model.dao.HelpDao;
@@ -52,8 +55,8 @@ public class HelpServiceImpl implements HelpService{
 
 	// insert
 	@Override
-	public ArrayList<Notice> insertHelp(Notice notice, PageInfo pi) {
-		return  hd.insertHelp(sqlSession, notice, pi);
+	public int insertHelp(Notice notice) {
+		return  hd.insertHelp(sqlSession, notice);
 	}
 
   
@@ -67,12 +70,14 @@ public class HelpServiceImpl implements HelpService{
 	public ArrayList<Notice> helpDetailSelectList(Notice notice) {
 		return hd.helpDetailSelectList(notice);
 	}
-
-
+   
+	
 	@Override
 	public Notice comparePassword(Notice notice) {
 		return hd.comparePassword(notice);
 	}
+
+ 
 
 	
 }

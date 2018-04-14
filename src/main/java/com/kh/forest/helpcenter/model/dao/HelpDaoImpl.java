@@ -77,15 +77,11 @@ public class HelpDaoImpl implements HelpDao {
 	}
 
 	@Override
-	public ArrayList<Notice> insertHelp(SqlSessionTemplate sqlSession, Notice notice, PageInfo pi) {
+	public int insertHelp(SqlSessionTemplate sqlSession, Notice notice) {
 		int result = 0;
-		ArrayList<Notice> list = null;
 		result = sqlSession.insert("Notice.insertNotice", notice);
-		
-		if (result > 0) {
-			list = (ArrayList) sqlSession.selectList("Notice.selectNotice", notice);
-		}
-		return list;
+		 
+		return result;
 	}
 
 	@Override

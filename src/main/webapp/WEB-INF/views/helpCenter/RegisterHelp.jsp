@@ -59,15 +59,7 @@
     </div>
     
   
-
-  <div class="form-field">
-  <label>첨부 파일</label>
-  <div id="upload-dropzone" class="upload-dropzone">
-  <input type="file" name="photo"/>
  
-</div>
- 
-</div>
 
  
   <footer><input type="submit" name="commit" value="제출" /></footer>
