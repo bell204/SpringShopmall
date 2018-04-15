@@ -137,7 +137,9 @@ a{
 	
 	</c:forEach> <!--  본문 끝 --> <br>
 	<br>
-
+ 
+      
+     
 	<section class="responses comments" id="responses">
 		<div class="container">
 
@@ -159,6 +161,13 @@ a{
 			</div>
 		</div>
 	</section>
+	
+	<div id="replySelectArea">
+         <table id="replySelectTable" border="1" align="center"> 
+         <tr id="replySelectTable1">
+         </tr>
+         </table>
+      </div>
 
 
 	<!-- The Modal -->
@@ -216,24 +225,34 @@ a{
 			type:"post",
 			dataType:"json",
 			data:{ReplyHelp, ReplyHelp},
-			success:function(data){
-  
-				var $table = $("#Reply").css("width","300px");
-				$table.html('');
-				
-				var $tr = $("<tr>");
-				//var $th = $("<td>").text("내용").css('float','center');
-				
-				//var $total=$table.append($tr).append($th);
-				
-				for(var i=0; i<data.length; i++){
-				 
-					var $contentTd = $("<td>").text(data[i].comment_content).css({"width":"100%","background":"orangered"});
-					var $tr1=$tr.append($contentTd);
 			
-					$table.append($tr1);
-				}
-			}
+		     success:function(data){               	   
+	              	var $replySelectTable = $("#replySelectTable").css("width","90%");
+	              		$replySelectTable.html('');
+	              		var $tr1 = $("<tr>")
+	              		var $th1= $("<td>").text("아이디").css('float','center');
+	              		var $th2= $("<td>").text("내용").css('float','center');
+	               
+	              		// table에 tr 붙이고 tr에 th붙임
+	              		$replySelectTable.append($tr1).append($th1).append($th2)
+	              		for(var key in data){
+	        
+	              		var $tr = $("<tr>").css("align","center")
+	              		var $writerTd = $("<td>").text(data[key].comment_content).css("width","100px");
+	              		//var $contentTd= $("<td>").text(data[key].reply_content).css("width", "400px");
+	              		
+	              		// tr에 td 붙임
+	              		$tr.append($writerTd);
+	              		//$tr.append($contentTd);
+	              		$replySelectTable.append($tr).addClass("serviceTable inquiry_list");
+	              		}
+	               },
+	               error:function(msg){
+	                  alert(msg);
+	               }
+			 
+			 
+			
 		});
 		return false;
 	}
