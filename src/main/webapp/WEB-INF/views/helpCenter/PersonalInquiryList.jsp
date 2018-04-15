@@ -84,7 +84,7 @@ h1 {
 								<tr>
 									<td width="10%" align="center";>${ Notice.NOTICE_NO }</td>
 									<td width="35%" align="center";>${ Notice.NOTICE_TITLE }</td>
-									<td width="15%" align="center";>${ Notice.NOTICE_TITLE }</td>
+									<td width="15%" align="center";>${ Notice.user_id }</td>
 									<td width="15%" align="center";>${ Notice.NOTICE_DATE }</td>
 									<td width="15%" align="center";>완료</td>
 								</tr>

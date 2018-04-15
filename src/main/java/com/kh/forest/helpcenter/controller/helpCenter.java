@@ -1,11 +1,11 @@
 package com.kh.forest.helpcenter.controller;
 
-import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.forest.common.Member;
 import com.kh.forest.helpcenter.model.exception.HelpException;
 import com.kh.forest.helpcenter.model.service.HelpService;
 import com.kh.forest.helpcenter.model.service.sha512;
@@ -39,10 +41,21 @@ public class helpCenter {
 	// 댓글, 에러 및 트랜잭션 처리만 하면끝 (AOP)
 	
 	// 1 메인 로딩 (get) (매개변수 x) // 헬프센터 메인은 디비에서 가져올 것 없음. 완료
+	// 세션에 정보 저장
 	@RequestMapping(value = "helpCenter.help", method = RequestMethod.GET)
-	public ModelAndView helpCenter(ModelAndView mv) {
-
+	public ModelAndView helpCenter(ModelAndView mv, Member loginUser, HttpSession session) {
 		try {
+
+			String USER_ID= "admin";
+			String USER_PWD="admin";
+			 
+			loginUser.setmId(USER_ID);
+			loginUser.setmPwd(USER_PWD);
+			
+			
+			session.setAttribute("loginUser", loginUser);
+	 		
+			
 			System.out.println("helpCenter");
 			mv.setViewName("/helpCenter");
 
@@ -170,20 +183,30 @@ public class helpCenter {
 		return mv;
 	}
 
-	// 6 문의 등록 상세 페이지에서 댓글(post) (ajax) ( ) 한줄씩 나오게 수정(댓글 깊이 만들기) 1
+	// 6 문의 등록 상세 페이지에서 댓글(post) (ajax) 
 	@RequestMapping(value = "Reply.help", method = RequestMethod.POST)
-	public void ReplyHelp(ModelAndView mv, String ReplyHelp, Commentary reply, HttpServletResponse response) {
+	public void ReplyHelp(ModelAndView mv, String ReplyHelp, String notice_no, Commentary reply, HttpServletResponse response) {
 
 		// 맵형식
 		ObjectMapper mapper = new ObjectMapper();
 
+		String user_no="1";
+		
 		try {
 			System.out.println(ReplyHelp);
-
+			System.out.println(notice_no);
+			 
 			reply.setComment_content(ReplyHelp);
+			reply.setNotice_no(notice_no);
+			reply.setUser_no(user_no);
+			
 			ArrayList<Commentary> replyList = hs.insertCommentary(reply);
 
+			
 			System.out.println(replyList);
+			
+			// 한글 깨짐 방지
+			response.setContentType("text/html;charset=UTF-8"); 
 			response.getWriter().print(mapper.writeValueAsString(replyList));
 
 		} catch (Exception e) {

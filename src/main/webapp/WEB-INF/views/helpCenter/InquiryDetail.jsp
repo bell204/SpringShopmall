@@ -135,7 +135,7 @@ a{
 	
 	</script>
 	
-	</c:forEach> <!--  본문 끝 --> <br>
+	 <!--  본문 끝 --> <br>
 	<br>
  
       
@@ -154,8 +154,10 @@ a{
 					<div class="clearfix">
 
 						<div class="float-right">
-							<button class="btn btn-create-comment" onclick="return Reply()">관리자 답변</button>
+							<button class="btn btn-create-comment" onclick="return Reply(${ Notice.NOTICE_NO })">관리자 답변</button>
 						</div>
+						</c:forEach>
+						
 					</div>
 				</form>
 			</div>
@@ -217,16 +219,18 @@ a{
 
 
 	<script>
-	function Reply(){
+	function Reply(notice_no){
 		var ReplyHelp= $("#ReplyHelp").val();
 		
 		$.ajax({
 			url:"Reply.help",
 			type:"post",
 			dataType:"json",
-			data:{ReplyHelp, ReplyHelp},
+			data:{ReplyHelp: ReplyHelp,
+				notice_no: notice_no},
 			
-		     success:function(data){               	   
+		     success:function(data){     
+		    	 	console.log(data);
 	              	var $replySelectTable = $("#replySelectTable").css("width","90%");
 	              		$replySelectTable.html('');
 	              		var $tr1 = $("<tr>")
@@ -238,12 +242,13 @@ a{
 	              		for(var key in data){
 	        
 	              		var $tr = $("<tr>").css("align","center")
-	              		var $writerTd = $("<td>").text(data[key].comment_content).css("width","100px");
-	              		//var $contentTd= $("<td>").text(data[key].reply_content).css("width", "400px");
+	  
+	              		var $useridTd = $("<td>").text(data[key].user_id).css("width","100px");
+	              		var $contentTd= $("<td>").text(data[key].comment_content).css("width", "400px");
 	              		
 	              		// tr에 td 붙임
-	              		$tr.append($writerTd);
-	              		//$tr.append($contentTd);
+	              		$tr.append($useridTd);
+	              		$tr.append($contentTd);
 	              		$replySelectTable.append($tr).addClass("serviceTable inquiry_list");
 	              		}
 	               },
@@ -258,7 +263,9 @@ a{
 	}
  
 	 
-	 </script> <a href="InquiryList.help" id="retrunList">목록으로 돌아가기</a> </main>
+	 </script> 
+	 
+	 <a href="InquiryList.help" id="retrunList">목록으로 돌아가기</a> </main>
 
 
 

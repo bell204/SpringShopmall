@@ -11,17 +11,18 @@
 		<result property="notice_no" column="NOTICE_NO"/>
 		<result property="tree_no" column="TREE_NO"/>
 		<result property="user_no" column="USER_NO"/>
-	
+		<result property="user_id" column="USER_ID"/>		
 	</resultMap>
   
  	<select id="selectCommentary" resultMap="commentaryResultSet" parameterType="Commentary">
-		SELECT * 
-		FROM Commentary 
+		SELECT C.COMMENT_NO, C.COMMENT_CONTENT, M.USER_ID  
+		FROM Commentary C
+		INNER JOIN MEMBER M ON(C.USER_NO=M.USER_NO)
 	</select>
  
 	<insert id="insertCommentary">
-      INSERT INTO COMMENTARY (COMMENT_NO, COMMENT_CONTENT)
-      VALUES(SEQ_CNO.NEXTVAL, #{comment_content})
+      INSERT INTO COMMENTARY (COMMENT_NO, COMMENT_CONTENT, NOTICE_NO, USER_NO)
+      VALUES(SEQ_CNO.NEXTVAL, #{comment_content}, #{notice_no},  #{user_no})
    </insert>
    
 	 

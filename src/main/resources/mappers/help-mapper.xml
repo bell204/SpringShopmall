@@ -10,6 +10,8 @@
 		<result property="NOTICE_CONTENT" column="NOTICE_CONTENT"/>
 		<result property="NOTICE_DATE" column="NOTICE_DATE"/>
 		<result property="NOTICE_PWD" column="NOTICE_PWD"/>
+		<result property="NOTICE_PWD" column="NOTICE_PWD"/>
+		
 	</resultMap>
  
 
@@ -19,8 +21,10 @@
    </insert>
   
  	<select id="selectNotice" resultMap="noticeResultSet" parameterType="Notice">
-		SELECT * FROM NOTICE
-		ORDER BY NOTICE_NO DESC 	
+			SELECT N.NOTICE_NO, N.NOTICE_TITLE, M.USER_ID, N.NOTICE_DATE
+			FROM NOTICE N
+     		JOIN MEMBER M ON(M.USER_NO=N.USER_NO)
+			ORDER BY N.NOTICE_NO DESC
 	</select>
  
  
@@ -65,9 +69,10 @@
 	
 	 
 	 <select id="recoverSelectNotice" resultMap="noticeResultSet" parameterType="Notice">
-			SELECT * 
-			FROM NOTICE 
-			ORDER BY NOTICE_NO DESC 
+			SELECT N.NOTICE_NO, N.NOTICE_TITLE, M.USER_ID, N.NOTICE_DATE
+			FROM NOTICE N
+      		JOIN MEMBER M ON(M.USER_NO=N.USER_NO)
+			ORDER BY N.NOTICE_NO DESC
 	</select>
 	
 	<select id="helpDetailSelectList" resultMap="noticeResultSet" parameterType="Notice">

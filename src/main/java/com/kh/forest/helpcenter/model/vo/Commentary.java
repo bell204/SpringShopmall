@@ -11,6 +11,18 @@ public class Commentary implements java.io.Serializable{
 	private String tree_no;
 	private String user_no;
 	
+	// 임시
+	private String user_id;
+	
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	
+	
 	public Commentary(){};
 	
 	public Commentary(String comment_no, String comment_content, String notice_no, String tree_no, String user_no) {
@@ -59,7 +71,8 @@ public class Commentary implements java.io.Serializable{
 		return "Commentary [comment_no=" + comment_no + ", comment_content=" + comment_content + ", notice_no="
 				+ notice_no + ", tree_no=" + tree_no + ", user_no=" + user_no + "]";
 	}
-	
+
+
 	
 	
 
