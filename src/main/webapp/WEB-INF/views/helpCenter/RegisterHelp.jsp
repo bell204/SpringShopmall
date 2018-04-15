@@ -31,12 +31,13 @@
       
     </div>
      
+     <!-- 제목은 한글만 가능하게 정규표현식 적용  (ㄱ ㄴㄷㄹ 안됨) /^[가-힣]+$/-->
  
     <div class="form-field string  required  request_subject" >
       <label for="request_subject">제목</label>
       <input type="text" name="NOTICE_TITLE" id="NOTICE_TITLE" maxlength="150" size="150" aria-required="true" aria-describedby="request_subject_hint" />
       
-      <p id="request_subject_hint">보내실 문의의 제목을 입력하세요.</p>
+      <p id="request_subject_hint">보내실 문의의 제목을 입력하세요.(<b class="font_12no66">* 한글과 영문만 가능</b>)</p>
     </div>
 
     
@@ -55,7 +56,7 @@
       <label for="request_password">비밀번호</label>
       <input type="password" name="NOTICE_PWD" id="NOTICE_PWD" maxlength="150" size="150" aria-required="true" aria-describedby="request_subject_hint" />
       
-      <p id="request_subject_hint">문의글을 확인할 비밀번호를 입력하세요</p>
+      <p id="request_subject_hint">문의글을 확인할 비밀번호를 입력하세요(<b class="font_12no66">* 3~6자의 영문자, 숫자조합</b>)</p>
     </div>
      
 
@@ -63,20 +64,29 @@
   <footer><a onclick="registerCheck()" />제출</a></footer>
 
     <script>
-  function registerCheck(){
+ 
+    // 제목 및 비밀번호 정규표현식 처리
+    
+    function registerCheck(){
      var NOTICE_TITLE= $("#NOTICE_TITLE").val();
      var NOTICE_PWD=$("#NOTICE_PWD").val();
      
      if(NOTICE_TITLE==""){
         alert("제목을 입력해주세요")
         return false;
+        
+     }else if(!/^[가-힣]+$/.test(NOTICE_TITLE)){
+			alert("한글 제목만 가능합니다");
+        return false;
      }
       
      if(NOTICE_PWD==""){
         alert("비밀번호를 입력해주세요")
         return false;
+     }else if(!/^[a-zA-Z0-9]{3,6}$/.test(NOTICE_PWD)){
+    	 alert("숫자와 영문자 조합으로 3~6자리를 사용해야 합니다.");
+         return false;
      }
-     
     $("#new_request").submit();
   }
   

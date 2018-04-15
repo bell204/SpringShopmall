@@ -46,9 +46,11 @@ public class helpCenter {
 	public ModelAndView helpCenter(ModelAndView mv, Member loginUser, HttpSession session) {
 		try {
 
-			String USER_ID= "admin";
+			String USER_ID = "admin";
 			String USER_PWD="admin";
-			 
+			int USER_NO =1; 
+			
+			loginUser.setmNo(USER_NO);
 			loginUser.setmId(USER_ID);
 			loginUser.setmPwd(USER_PWD);
 			
@@ -83,16 +85,18 @@ public class helpCenter {
 	
 	// 3 문의 등록 폼 제출 & 리다이렉트하여 문의 등록 리스트 호출(post) // 인서트와 셀렉트 따로
 	@RequestMapping(value = "PersonalInquiryList.help", method = RequestMethod.POST)
-	public String PersonalInquiryList(String NOTICE_TITLE, String NOTICE_CONTENT, String NOTICE_PWD, 
-			HttpServletRequest request, Notice notice) {
- 
+	public String PersonalInquiryList(String NOTICE_TITLE, String NOTICE_CONTENT, String NOTICE_PWD, HttpSession session, Notice notice) {
+		
+		String USER_NO="1";
+		
+		
 		try {
 			System.out.println(NOTICE_TITLE);
 			System.out.println(NOTICE_CONTENT);
 			System.out.println(NOTICE_PWD);
 
+			notice.setUSER_NO(USER_NO);
 			notice.setNOTICE_PWD(sha512.encryptSHA512(NOTICE_PWD));
-  
 			notice.setNOTICE_TITLE(NOTICE_TITLE);
 			notice.setNOTICE_CONTENT(NOTICE_CONTENT);
 
