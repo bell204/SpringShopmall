@@ -45,7 +45,7 @@
           
             <li class="promoted-articles-item">
             <a href="#">   
-                포스타입은 무엇인가요?
+                포레스트는 무엇인가요?
               </a>
             </li>
           
@@ -69,7 +69,7 @@
           
             <li class="promoted-articles-item">
               <a href="#">               
-               포스타입의 수수료 정책에 대해서 알려 주세요.
+               포레스트의 수수료 정책에 대해서 알려 주세요.
               </a>
             </li>
           

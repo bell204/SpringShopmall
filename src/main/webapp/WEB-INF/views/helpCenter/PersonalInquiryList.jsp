@@ -72,7 +72,6 @@ h1 {
 							<tr>
 								<th width="10%">NO</th>
 								<th width="35%">제목</th>
-								<th width="15%">첨부파일</th>
 								<th width="15%">글쓴이</th>
 								<th width="15%">등록일</th>
 								<th width="15%">답변</th>
@@ -85,7 +84,6 @@ h1 {
 								<tr>
 									<td width="10%" align="center";>${ Notice.NOTICE_NO }</td>
 									<td width="35%" align="center";>${ Notice.NOTICE_TITLE }</td>
-									<td width="15%" align="center";>11.jpg</td>
 									<td width="15%" align="center";>${ Notice.NOTICE_TITLE }</td>
 									<td width="15%" align="center";>${ Notice.NOTICE_DATE }</td>
 									<td width="15%" align="center";>완료</td>

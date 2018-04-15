@@ -11,6 +11,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.forest.helpcenter.model.dao.HelpDao;
+import com.kh.forest.helpcenter.model.exception.HelpException;
 import com.kh.forest.helpcenter.model.vo.Commentary;
 import com.kh.forest.helpcenter.model.vo.Notice;
 import com.kh.forest.helpcenter.model.vo.PageInfo;
@@ -30,50 +31,50 @@ public class HelpServiceImpl implements HelpService{
  
 	// 검색 결과 조회 (count로)
 	@Override
-	public int getHelpSearchResultListCount(SearchCondition sc) {
+	public int getHelpSearchResultListCount(SearchCondition sc) throws HelpException {
 		return hd.getHelpSearchResultListCount(sc);
 	}
 
 
 	@Override
-	public ArrayList<Notice> searchHelpResultList(SearchCondition sc, PageInfo pi) {
+	public ArrayList<Notice> searchHelpResultList(SearchCondition sc, PageInfo pi) throws HelpException {
 		return hd.getHelpSearchResultList(sc, pi);
 	}
 
 
 	// insert
 	@Override
-	public ArrayList<Commentary> insertCommentary(Commentary reply) {
+	public ArrayList<Commentary> insertCommentary(Commentary reply) throws HelpException {
 		return hd.insertCommentary(reply);
 	}
 
 
 	@Override
-	public int getHelpListCount() {
+	public int getHelpListCount() throws HelpException {
 		return hd.getHelpListCount();
 	}
 
 	// insert
 	@Override
-	public int insertHelp(Notice notice) {
+	public int insertHelp(Notice notice) throws HelpException {
 		return  hd.insertHelp(sqlSession, notice);
 	}
 
   
 	@Override
-	public ArrayList<Notice> recoverHelpList(PageInfo pi) {
+	public ArrayList<Notice> recoverHelpList(PageInfo pi) throws HelpException {
 		return  hd.recoverHelpList(pi);
 	}
 
 
 	@Override
-	public ArrayList<Notice> helpDetailSelectList(Notice notice) {
+	public ArrayList<Notice> helpDetailSelectList(Notice notice) throws HelpException {
 		return hd.helpDetailSelectList(notice);
 	}
    
 	
 	@Override
-	public Notice comparePassword(Notice notice) {
+	public Notice comparePassword(Notice notice) throws HelpException {
 		return hd.comparePassword(notice);
 	}
 

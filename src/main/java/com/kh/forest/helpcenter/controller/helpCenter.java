@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.forest.helpcenter.model.exception.HelpException;
 import com.kh.forest.helpcenter.model.service.HelpService;
 import com.kh.forest.helpcenter.model.service.sha512;
 import com.kh.forest.helpcenter.model.vo.Commentary;
@@ -35,7 +36,7 @@ public class helpCenter {
 	private sha512 sha512;
 
 	
-	// 댓글, 회원 등록시 다 유효성 검사, 에러 및 트랜잭션 처리만 하면끝 (AOP)
+	// 댓글, 에러 및 트랜잭션 처리만 하면끝 (AOP)
 	
 	// 1 메인 로딩 (get) (매개변수 x) // 헬프센터 메인은 디비에서 가져올 것 없음. 완료
 	@RequestMapping(value = "helpCenter.help", method = RequestMethod.GET)
@@ -47,6 +48,7 @@ public class helpCenter {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		
 		}
 		return mv;
 	}
@@ -65,6 +67,7 @@ public class helpCenter {
 		return mv;
 	}
 
+	
 	// 3 문의 등록 폼 제출 & 리다이렉트하여 문의 등록 리스트 호출(post) // 인서트와 셀렉트 따로
 	@RequestMapping(value = "PersonalInquiryList.help", method = RequestMethod.POST)
 	public String PersonalInquiryList(String NOTICE_TITLE, String NOTICE_CONTENT, String NOTICE_PWD, 
@@ -76,8 +79,7 @@ public class helpCenter {
 			System.out.println(NOTICE_PWD);
 
 			notice.setNOTICE_PWD(sha512.encryptSHA512(NOTICE_PWD));
- 
-			 
+  
 			notice.setNOTICE_TITLE(NOTICE_TITLE);
 			notice.setNOTICE_CONTENT(NOTICE_CONTENT);
 
@@ -94,6 +96,8 @@ public class helpCenter {
 
 	}
 
+	// 사용장 정의 예외1 
+	
 	// 4 메인 검색 (post) 완료
 	@RequestMapping(value = "HelpCenterSearch.help", method = RequestMethod.POST)
 	public ModelAndView HelpCenterSearch(ModelAndView mv, String searchCondition, String searchContent, Notice notice,
@@ -158,8 +162,10 @@ public class helpCenter {
 			mv.addObject("pi", pi);
 			mv.setViewName("/HelpCenterSearch");
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (HelpException e) {
+			mv.addObject("message", e.getMessage());
+			mv.setViewName("/errorPage");
+			
 		}
 		return mv;
 	}
@@ -231,6 +237,8 @@ public class helpCenter {
 
 	}
 
+	// 사용장 정의 예외 2 
+	
 	//10  문의 등록 리스트에서 상세 페이지 (get) select로 조회 완료
 		@RequestMapping(value = "InquiryDetail.help", method = RequestMethod.GET)
 		public ModelAndView InquiryDetail(ModelAndView mv, String NOTICE_NO, Notice notice) {
@@ -243,8 +251,9 @@ public class helpCenter {
 				mv.addObject("list", list);
 				mv.setViewName("/InquiryDetail");
 
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (HelpException e) {
+				mv.addObject("message", e.getMessage());
+				mv.setViewName("/errorPage");
 			}
 			return mv;
 
@@ -255,7 +264,7 @@ public class helpCenter {
  
 
 	@RequestMapping(value = "comparePassword.help", method = RequestMethod.POST)
-	public void comparePassword(String NOTICE_PWD, String NOTICE_NO, Notice notice, HttpServletResponse response) {
+	public void comparePassword(ModelAndView mv, String NOTICE_PWD, String NOTICE_NO, Notice notice, HttpServletResponse response) {
 
 		try {
 			 
@@ -279,18 +288,14 @@ public class helpCenter {
 				response.getWriter().print(mapper.writeValueAsString(passwordCheck));
 
 			}
-
-
-
-			// 에러 처리를 안 해서 그렇구나.
-
+ 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	// 11 문의 목록으로 돌아갈 때 // 전체 셀렉트
+	// 11 문의 목록으로 돌아갈 때 // 전체 셀렉트 	// 사용장 정의 예외
 	@RequestMapping(value = "InquiryList.help", method = RequestMethod.GET)
 	public ModelAndView InquiryList(ModelAndView mv, HttpServletRequest request) {
 
@@ -335,8 +340,9 @@ public class helpCenter {
 
 			mv.setViewName("/PersonalInquiryList");
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (HelpException e) {
+			mv.addObject("message", e.getMessage());
+			mv.setViewName("/errorPage");
 		}
 
 		return mv;

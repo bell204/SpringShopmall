@@ -41,6 +41,12 @@
 	border: 1px solid #888;
 	width: 30%; /* Could be more or less, depending on screen size */
 }
+a{
+	border-radius: 4px;
+	box-sizing: border-box;
+	color: #999;
+	height: 30px;
+}
 </style>
 <body class="">
 
@@ -70,6 +76,14 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- 수정 삭제 -->
+					<div>
+					<p align="right"><a  href="#">수정</a> &nbsp;
+					<a align="right" href="#">삭제</a>
+					</p>
+					</div>
+					
 				</div>
 		</header>
 
@@ -128,7 +142,7 @@
 		<div class="container">
 
 			<div class="comments" id="comments">
-				<h3 class="section-title">댓글</h3>
+				<h3 class="section-title">관리자 답변</h3>
 
 				<form>
 					<textarea class="form-control autosize" name="ReplyHelp"
@@ -138,8 +152,7 @@
 					<div class="clearfix">
 
 						<div class="float-right">
-							<button class="btn btn-create-comment" onclick="return Reply()">댓글
-								남기기</button>
+							<button class="btn btn-create-comment" onclick="return Reply()">관리자 답변</button>
 						</div>
 					</div>
 				</form>
@@ -159,10 +172,10 @@
 			</p>
 			<p style="text-align: center; line-height: 1.5;">
 				<br />
-			<p>문의 등록 시 입력하신 비밀번호를 입력해 주세요.</p>
-			<label>비밀번호</label> <input type="password" name="NOTICE_PWD"
-				id="NOTICE_PWD"> <a onclick="pwd()"
-				class="signup-form__submit ga-event">확인</a>
+			<p align="center">문의 등록 시 입력하신 비밀번호를 입력해 주세요.</p>
+			<p align="center">비밀번호<input type="password" name="NOTICE_PWD" id="NOTICE_PWD"> 
+			<a onclick="pwd()"class="signup-form__submit ga-event">확인</a>
+			</p>
 			<p>
 				<br />
 			</p>
@@ -177,15 +190,15 @@
 	<!--End Modal--> <script type="text/javascript">
       
         jQuery(document).ready(function() {
-                $('#myModal').show();
-                
-                
+                $('.modal').show();
+                 
         });
         //팝업 Close 기능
-        function close_pop(flag) {
-             $('#myModal').hide();
-        };
-        
+          function close_pop(flag) {
+                    $('.modal').hide();
+                    
+               };
+                
     </script> <!--  댓글 표시 영역 -->
 	<table class="" id="Reply">
 		<tr>
