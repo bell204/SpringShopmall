@@ -16,7 +16,7 @@
 			/WEB-INF/config/spring-security.xml
 		</param-value>
 	</context-param>
-	 
+
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 
@@ -30,7 +30,7 @@
 
 	<!-- 로그인서블릿 -->
 
-			<!-- 한글 깨짐 방지 -->
+	<!-- 한글 깨짐 방지 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -43,20 +43,9 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- 
- 
-	<!--  xss 방어 처리를 위한 필터 등록--> 
- 
- 	<filter>
-		<filter-name>requestParamFilter</filter-name>
-		<filter-class>com.naver.service.filter.requestparam.RequestFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>requestParamFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
- 
- 
+
+  
+
 	<servlet>
 
 		<servlet-name>loginServlet</servlet-name>
@@ -246,7 +235,7 @@
 	</servlet-mapping>
 
 
-	
+
 
 
 

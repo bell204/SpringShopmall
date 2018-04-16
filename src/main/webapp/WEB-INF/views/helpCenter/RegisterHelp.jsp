@@ -37,10 +37,10 @@
       <label for="request_subject">제목</label>
       <input type="text" name="NOTICE_TITLE" id="NOTICE_TITLE" maxlength="150" size="150" aria-required="true" aria-describedby="request_subject_hint" />
       
-      <p id="request_subject_hint">보내실 문의의 제목을 입력하세요.(<b class="font_12no66">* 한글과 영문만 가능</b>)</p>
+      <p id="request_subject_hint">보내실 문의의 제목을 입력하세요.(<b class="font_12no66">* 한글만 가능</b>)</p>
     </div>
 
-    
+      
       <div class="suggestion-list" data-hc-class="searchbox" data-hc-suggestion-list="true"></div>
     
   

@@ -242,15 +242,7 @@
 			<version>4.2.3.RELEASE</version>
 		</dependency>
 
-
-		<!-- xss 방어 위한 Lucy-Xss-Servlet-Filter 사용 -->
-		<!-- https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss -->
-		<dependency>
-			<groupId>com.navercorp.lucy</groupId>
-			<artifactId>lucy-xss</artifactId>
-			<version>1.6.3</version>
-		</dependency>
-
+ 
 
 	</dependencies>
 

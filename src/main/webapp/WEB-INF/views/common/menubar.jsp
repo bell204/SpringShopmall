@@ -296,7 +296,7 @@
     <i class="fas fa-search" id="searching" style="color:rgba(80,80,80,0.3)"></i>
     <p id="home" onclick="location.href='#'">홈</p>
     <i class="fas fa-user" id="pic" style="color:white"></i>
-    <p id="name" onclick="location.href='helpCenter.help'" >dddddddddd</p> <!-- 한글 공백없이 8자, 영어 최대 13자 -->
+    <p id="name">dddddddddd</p> <!-- 한글 공백없이 8자, 영어 최대 13자 -->
     <i class="fas fa-comment-dots" id="alert" style="color:rgba(80,80,80,0.3)" onclick="alert()"></i>
     <div id="menuCap"><i class="fas fa-bars" id="menu" style="color:rgba(80,80,80,0.3)"></i></div>
     <div id="outline" style="z-index:-1;"></div>
@@ -307,7 +307,8 @@
         <tr><td id="t1">프로필 수정</td></tr>
         <tr><td>후원자 조회</td></tr>
         <tr><td>후원내역 조회</td></tr>
-        <tr><td>게시판</td></tr>
+         <tr><td>게시판</td></tr>
+        <tr><td><a onclick="location.href='helpCenter.help'">도움센터</a></td></tr>
         <tr><td id="t5">로그아웃</td></tr>
       </table>
     </div>

@@ -89,7 +89,9 @@ public class helpCenter {
 		try {
 			 
 			notice.setUSER_NO(USER_NO);
+			
 			notice.setNOTICE_PWD(sha512.encryptSHA512(NOTICE_PWD));
+			
 			notice.setNOTICE_TITLE(NOTICE_TITLE);
 			notice.setNOTICE_CONTENT(NOTICE_CONTENT);
 
