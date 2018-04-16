@@ -18,11 +18,13 @@
 
 IDE- 이클립스
 
+<hr>
 
 <h3>DB설계</h3>
 
 <img width="889" alt="default" src="https://user-images.githubusercontent.com/32535590/38807468-a604fbda-41b7-11e8-983e-dac236351259.png">
 
+<hr>
 
 <h3>구현기능</h3>
 
@@ -38,6 +40,8 @@ IDE- 이클립스
  
 비밀번호가 일치하면 암호 일치 완료라는 팝업창이 뜨고, 모달창을 닫을 수 있다 .
 
+<hr>
+
 <h3>트랜잭션 처리</h3>
 
 ![2](https://user-images.githubusercontent.com/32535590/38807895-1f15e218-41b9-11e8-939a-63a50cc985bd.PNG)
@@ -46,10 +50,11 @@ Insert, delete, update 처리의 경우 트랜잭션 처리를 해서 성공 시
 
 스프링에서 지원하는 트랜잭션 기능을 사용할 수 있다.
 
+<hr>
+
 <h3>정규표현식과 유효성검사</h3>
 
 ![3](https://user-images.githubusercontent.com/32535590/38807898-21cf8e1e-41b9-11e8-9139-dcdba2930d2c.PNG)
-
 
 <유효성검사>
 
@@ -61,6 +66,7 @@ Insert, delete, update 처리의 경우 트랜잭션 처리를 해서 성공 시
 
 비밀번호에 숫자와 영문자 3-6개 조합으로 작성하지 않으면 [숫자와 영문자 조합으로 3-6자만 가능하다]는 경고창이 뜬다.
 
+<hr>
 
 <h3>AOP를 할용한 자동 예외처리 </h3>
 
@@ -70,6 +76,7 @@ AOP를 사용하면 비즈니스 로직 외에 반복되는 구문을 편리하�
 
 예외 처리의 경우 매번 예외 처리를 작성해야 하는데, AOP를 사용하면 특정 에러일 때 미리 입력한 값이 출력됨.
 
+<hr>
 
 <h3>disqus api를 활용한 계층형 댓글 </h3>
 
@@ -79,6 +86,7 @@ AOP를 사용하면 비즈니스 로직 외에 반복되는 구문을 편리하�
 
 댓글 내용은 Disqus api 쪽 서버에 저장되며, 다른 페이지로 이동하였다가, 다시 화면으로 돌아와도 댓글이 남아있다.
 
+<hr>
 
 <h3>ckeditor api를 활용한 본문내용 편집</h3>
 
@@ -86,12 +94,21 @@ AOP를 사용하면 비즈니스 로직 외에 반복되는 구문을 편리하�
 
 ckeditor를 활용해 본문 작성 및 이미지 첨부가 가능하고, 변경 된 내용을 디비에 저장 가능하다
 
+<hr>
 
-
-<h3>사용자 편의를 위한 페이징 처리</h3>
+<h3>사용자 편의를 위한 마이바티스 동적 SQL및 페이징 처리</h3>
 
 ![7](https://user-images.githubusercontent.com/32535590/38807920-34fb133c-41b9-11e8-9fbf-2211841feea2.PNG)
 
+![7](https://user-images.githubusercontent.com/32535590/38808567-a8ecc522-41bb-11e8-8776-4b9e50fe6e52.PNG)
+
+1 listCount로 조건에 맞는 글 개수를 데이터베이스에서 가져옴
+
+2 SearchCondtion 객체와 PageInfo 객체를 searchHelpResultList 메소드에 인자로보내
+
+결과값을 전송받은 후 list 객체에 저장.
+
+<hr>
 
 <h3>개선사항</h3>
 
