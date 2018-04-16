@@ -6,7 +6,10 @@
 <html dir="ltr" lang="ko">
 <head>
 
+
+<script type='text/javascript' src="/firstSpring/resources/ckeditor/ckeditor.js"></script>
 <style>
+
 #retrunList {
 	border-radius: 4px;
 	box-sizing: border-box;
@@ -54,7 +57,7 @@ a{
 
 	</c:if>
 
-
+	
 	<jsp:include page="../common/header.jsp" />
 
 	<main class="main-content slide-left" id="main-content" role="main">
@@ -99,8 +102,7 @@ a{
 	<section class="responses comments" id="responses">
 		<div class="container">
 			<div class="comments" id="comments">
-				<textarea class="form-control autosize" name="content" id="mention"
-					rows="20">
+				<textarea class='ckeditor' name="content" id='editor' rows="20">
 					${ Notice.NOTICE_CONTENT }
 					</textarea>
 

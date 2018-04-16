@@ -56,9 +56,6 @@ public class helpCenter {
 			loginUser.setmPwd(USER_PWD);
 		 
 			session.setAttribute("loginUser", loginUser);
-	 		
-			
-			System.out.println("helpCenter");
 			mv.setViewName("/helpCenter");
 
 		} catch (Exception e) {
@@ -73,7 +70,6 @@ public class helpCenter {
 	public ModelAndView RegisterHelp(ModelAndView mv) {
 
 		try {
-			System.out.println("RegisterHelp");
 			mv.setViewName("/RegisterHelp");
 
 		} catch (Exception e) {
@@ -257,7 +253,6 @@ public class helpCenter {
 				notice.setNOTICE_NO(NOTICE_NO);
 				ArrayList<Notice> list = hs.helpDetailSelectList(notice);
 				
-				System.out.println(list);
 				mv.addObject("list", list);
 				mv.setViewName("/InquiryDetail");
 

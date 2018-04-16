@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="Member" type="com.kh.forest.common.Member"/>
 		<typeAlias alias="Notice" type="com.kh.forest.helpcenter.model.vo.Notice"/>
 		<typeAlias alias="Commentary" type="com.kh.forest.helpcenter.model.vo.Commentary"/>
 	</typeAliases>
