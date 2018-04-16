@@ -74,7 +74,6 @@ h1 {
 								<th width="35%">제목</th>
 								<th width="15%">글쓴이</th>
 								<th width="15%">등록일</th>
-								<th width="15%">답변</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -86,7 +85,6 @@ h1 {
 									<td width="35%" align="center";>${ Notice.NOTICE_TITLE }</td>
 									<td width="15%" align="center";>${ Notice.user_id }</td>
 									<td width="15%" align="center";>${ Notice.NOTICE_DATE }</td>
-									<td width="15%" align="center";>완료</td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -140,8 +140,8 @@ a{
 	 <!--  본문 끝 --> <br>
 	<br>
  
-      
-     
+      </c:forEach>
+     <!-- 자체 댓글 기능 
 	<section class="responses comments" id="responses">
 		<div class="container">
 
@@ -154,24 +154,48 @@ a{
 
 
 					<div class="clearfix">
-
 						<div class="float-right">
 							<button class="btn btn-create-comment" onclick="return Reply(${ Notice.NOTICE_NO })">관리자 답변</button>
 						</div>
-						</c:forEach>
+						
 						
 					</div>
 				</form>
 			</div>
 		</div>
 	</section>
+	-->
 	
-	<div id="replySelectArea">
+	<!-- 자체 댓글 기능 -->
+	<!--  div id="replySelectArea">
          <table id="replySelectTable" border="1" align="center"> 
          <tr id="replySelectTable1">
          </tr>
          </table>
-      </div>
+      </div>-->
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://http-localhost-8081-firstspring.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
 
 
 	<!-- The Modal -->
@@ -213,11 +237,7 @@ a{
                };
                 
     </script> <!--  댓글 표시 영역 -->
-	<table class="" id="Reply">
-		<tr>
-		</tr>
-
-	</table>
+	 
 
 
 	<script>

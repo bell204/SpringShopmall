@@ -43,9 +43,20 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-
-
+ 
+ 
+	<!--  xss 방어 처리를 위한 필터 등록--> 
+ 
+ 	<filter>
+		<filter-name>requestParamFilter</filter-name>
+		<filter-class>com.naver.service.filter.requestparam.RequestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>requestParamFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 
+ 
 	<servlet>
 
 		<servlet-name>loginServlet</servlet-name>

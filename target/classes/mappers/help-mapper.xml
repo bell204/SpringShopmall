@@ -51,18 +51,19 @@
  	
 	
 	 	<select id="selectSearchResultList" resultMap="noticeResultSet" parameterType="Notice">
-			SELECT * 
-			FROM NOTICE 
+			SELECT N.NOTICE_NO, N.NOTICE_TITLE, M.USER_ID, N.NOTICE_DATE 
+			FROM NOTICE N
+			JOIN MEMBER M ON(M.USER_NO=N.USER_NO)
 			<choose>
 				<when test="title != null">
-				WHERE NOTICE_TITLE LIKE '%' || #{title} || '%'
+				WHERE N.NOTICE_TITLE LIKE '%' || #{title} || '%'
 				</when>
 				
 				<otherwise>
-				WHERE NOTICE_CONTENT LIKE '%' || #{content} || '%'
+				WHERE N.NOTICE_CONTENT LIKE '%' || #{content} || '%'
 				</otherwise>
 			</choose>
-			ORDER BY NOTICE_NO DESC 
+			ORDER BY N.NOTICE_NO DESC 
 	</select>
 	 
 	 <select id="selectListCount" resultType="_int">
