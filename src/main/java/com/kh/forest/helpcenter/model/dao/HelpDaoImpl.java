@@ -27,8 +27,8 @@ public class HelpDaoImpl implements HelpDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
- 
-	// insert
+  
+	// insert // sql이 정상 작동하나 확인
 	@Override
 	public int getHelpSearchResultListCount(SearchCondition sc) throws HelpException {
 		int result = 0;

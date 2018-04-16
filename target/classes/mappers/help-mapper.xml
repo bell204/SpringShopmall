@@ -15,6 +15,18 @@
 	</resultMap>
  
 
+	<select id="searchResultListCount" resultType="_int">
+			SELECT COUNT(*) 
+			FROM NOTICE 
+			<if test="title !=null">
+				WHERE NOTICE_TITLE LIKE '%' || #{title} || '%'
+			</if>
+			<if test="content !=null">
+				WHERE NOTICE_CONTENT LIKE '%' || #{content} || '%'
+			</if>
+	</select>
+
+
 	<insert id="insertNotice">   	
       INSERT INTO NOTICE (NOTICE_NO, USER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_PWD)
       VALUES(SEQ_NOTICE.NEXTVAL, #{USER_NO}, #{NOTICE_TITLE}, #{NOTICE_CONTENT}, SYSDATE, #{NOTICE_PWD})
@@ -36,16 +48,7 @@
 	</select>
 	 
    
- 	<select id="searchResultListCount" resultType="_int">
-			SELECT COUNT(*) 
-			FROM NOTICE 
-			<if test="title !=null">
-				WHERE NOTICE_TITLE LIKE '%' || #{title} || '%'
-			</if>
-			<if test="content !=null">
-				WHERE NOTICE_CONTENT LIKE '%' || #{content} || '%'
-			</if>
-	</select>
+ 	
 	
 	 	<select id="selectSearchResultList" resultMap="noticeResultSet" parameterType="Notice">
 			SELECT * 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class AfterAdvice {
-	@Pointcut("execution(* com.kh.tsp..*ServiceImpl.*(..))")
+	@Pointcut("execution(* com.kh.forest..*ServiceImpl.*(..))")
 	public void allPointcut(){}
 	
 	@After("allPointcut()")

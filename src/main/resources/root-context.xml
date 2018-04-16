@@ -46,7 +46,7 @@
 	
 	<!-- aop 추가 -->
 	<aop:config proxy-target-class="true">
-		<aop:pointcut expression="execution(* com.kh.tsp..*ServiceImpl.*(..))" id="serviceMethod"/>
+		<aop:pointcut expression="execution(* com.kh.forest..*ServiceImpl.*(..))" id="serviceMethod"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"
 					id="transactionAdvisor"/>
 					

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class AfterThrowingAdvice {
-	@Pointcut("execution(* com.kh.tsp..*ServiceImpl.*(..))")
+	@Pointcut("execution(* com.kh.forest..*ServiceImpl.*(..))")
 	public void allPointcut(){}
 	
 	@AfterThrowing(pointcut="allPointcut()", throwing="exceptObj")

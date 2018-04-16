@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 @Aspect
 public class BeforeAdvice {
-	@Pointcut("execution(* com.kh.tsp..*ServiceImpl.*(..))")
+	@Pointcut("execution(* com.kh.forest..*ServiceImpl.*(..))")
 	public void servicePointcut(){}
-	@Pointcut("execution(* com.kh.tsp..*DaoImpl.*(..))")
+	@Pointcut("execution(* com.kh.forest..*DaoImpl.*(..))")
 	public void daoPointcut(){}
 	
 	@Before("daoPointcut()")

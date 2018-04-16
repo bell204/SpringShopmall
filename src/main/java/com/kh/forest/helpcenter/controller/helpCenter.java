@@ -38,10 +38,11 @@ public class helpCenter {
 	private sha512 sha512;
 
 	
-	// 댓글, 에러 및 트랜잭션 처리만 하면끝 (AOP)
+	// AOP 처리만 하면 됨 (   )
+	
 	
 	// 1 메인 로딩 (get) (매개변수 x) // 헬프센터 메인은 디비에서 가져올 것 없음. 완료
-	// 세션에 정보 저장
+	// 세션에 정보 저장 
 	@RequestMapping(value = "helpCenter.help", method = RequestMethod.GET)
 	public ModelAndView helpCenter(ModelAndView mv, Member loginUser, HttpSession session) {
 		try {
@@ -53,8 +54,7 @@ public class helpCenter {
 			loginUser.setmNo(USER_NO);
 			loginUser.setmId(USER_ID);
 			loginUser.setmPwd(USER_PWD);
-			
-			
+		 
 			session.setAttribute("loginUser", loginUser);
 	 		
 			
@@ -91,10 +91,7 @@ public class helpCenter {
 		
 		
 		try {
-			System.out.println(NOTICE_TITLE);
-			System.out.println(NOTICE_CONTENT);
-			System.out.println(NOTICE_PWD);
-
+			 
 			notice.setUSER_NO(USER_NO);
 			notice.setNOTICE_PWD(sha512.encryptSHA512(NOTICE_PWD));
 			notice.setNOTICE_TITLE(NOTICE_TITLE);
@@ -124,12 +121,7 @@ public class helpCenter {
 
 			// 객체 클래스 활용해서 여기에 검색한 값 저장 후 전송
 			SearchCondition sc = new SearchCondition();
-
-			// select name
-			System.out.println(searchCondition);
-
-			// 빈칸 입력 검색값
-			System.out.println(searchContent);
+ 
 
 			// 제목(title)으로 검색할 수도
 			// 내용(content)으로 검색할 수도
@@ -197,18 +189,12 @@ public class helpCenter {
 		String user_no="1";
 		
 		try {
-			System.out.println(ReplyHelp);
-			System.out.println(notice_no);
-			 
 			reply.setComment_content(ReplyHelp);
 			reply.setNotice_no(notice_no);
 			reply.setUser_no(user_no);
 			
 			ArrayList<Commentary> replyList = hs.insertCommentary(reply);
 
-			
-			System.out.println(replyList);
-			
 			// 한글 깨짐 방지
 			response.setContentType("text/html;charset=UTF-8"); 
 			response.getWriter().print(mapper.writeValueAsString(replyList));
@@ -224,7 +210,6 @@ public class helpCenter {
 	public ModelAndView GeneralFAQ(ModelAndView mv) {
 
 		try {
-			System.out.println("GeneralFAQ");
 			mv.setViewName("/GeneralFAQ");
 
 		} catch (Exception e) {
@@ -239,7 +224,6 @@ public class helpCenter {
 	public ModelAndView AuthorFAQ(ModelAndView mv) {
 
 		try {
-			System.out.println("AuthorFAQ");
 			mv.setViewName("/AuthorFAQ");
 
 		} catch (Exception e) {
@@ -254,7 +238,6 @@ public class helpCenter {
 	public ModelAndView ReaderFAQ(ModelAndView mv) {
 
 		try {
-			System.out.println("ReaderFAQ");
 			mv.setViewName("/ReaderFAQ");
 
 		} catch (Exception e) {
@@ -298,16 +281,13 @@ public class helpCenter {
 			sha512 sha512 =new sha512(); 
 			
 			String encodePwd=sha512.encryptSHA512(NOTICE_PWD);
-					
-			System.out.println(encodePwd);
-			System.out.println(NOTICE_NO);
+					 
 			notice.setNOTICE_PWD(encodePwd);
 			notice.setNOTICE_NO(NOTICE_NO);
 			notice = hs.comparePassword(notice);
 			
 			String passwordCheck=notice.getNOTICE_CONTENT();
 			
-			System.out.println(notice);
 
 			if (notice != null) {
 				String check="암호가 맞습니다.";
@@ -327,7 +307,6 @@ public class helpCenter {
 	public ModelAndView InquiryList(ModelAndView mv, HttpServletRequest request) {
 
 		try {
-			System.out.println("InquiryList");
 
 			// 페이징 부분 변수 선언
 			int currentPage;
