@@ -28,17 +28,38 @@ IDE- 이클립스
 
 <h4>SHA512 암호화를 활용한 비밀번호 암호화</h4>
 
+![1 sha512](https://user-images.githubusercontent.com/32535590/38807884-179479fa-41b9-11e8-8972-2d9141b4944c.PNG)
+
+![1 sha512](https://user-images.githubusercontent.com/32535590/38807890-1c5783d8-41b9-11e8-9bf6-984500b22ff5.PNG)
+
 <h4>트랜잭션 처리</h4>
+
+![2](https://user-images.githubusercontent.com/32535590/38807895-1f15e218-41b9-11e8-939a-63a50cc985bd.PNG)
 
 <h4>정규표현식과 유효성검사와</h4>
 
+![3](https://user-images.githubusercontent.com/32535590/38807898-21cf8e1e-41b9-11e8-9139-dcdba2930d2c.PNG)
+
 <h4>AOP를 할용한 자동 예외처리 </h4>
+
+![4 aop](https://user-images.githubusercontent.com/32535590/38807902-25ca8082-41b9-11e8-93f3-379cae1a071a.PNG)
 
 <h4>disqus api를 활용한 계층형 댓글 </h4>
 
+![5 disqus api](https://user-images.githubusercontent.com/32535590/38807908-2a50de44-41b9-11e8-86ea-9ff6d848591b.PNG)
+
+![5](https://user-images.githubusercontent.com/32535590/38807910-2dab9188-41b9-11e8-9951-c026e256c252.PNG)
+
 <h4>ckeditor api를 활용한 본문내용 편집</h4>
 
-<h2>개선사항</h2>
+![6 ckeditor api](https://user-images.githubusercontent.com/32535590/38807916-31e938e0-41b9-11e8-86dd-ccac82a9905b.PNG)
+
+<h4>사용자 편의를 위한 페이징 처리</h4>
+
+![7](https://user-images.githubusercontent.com/32535590/38807920-34fb133c-41b9-11e8-9fbf-2211841feea2.PNG)
+
+
+<h3>개선사항</h3>
 
 1 코드 리팩토링
 
