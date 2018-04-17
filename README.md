@@ -10,15 +10,21 @@
 
 <h3>개발 환경</h3>
 
-운영체제- Window8
+OS- Window8
 
-사용 언어- Java(Jdk 1.8), Javascript, Html5, css3
+Language- Java(Jdk 1.8), Javascript, Html5, css3
 
-라이브러리- Jquery 3.3.1, Jackson 2.9.3
+protocol : http
 
-프레임워크- Spring 5.04 
+DataBase : Oracle 11g
 
-IDE- 이클립스
+web application server : tomcat 8.5
+
+Library- Jquery 3.3.1, Jackson api 2.9.3 , disqus api, ckeditor api, aspectJ 1.8.13
+
+Framework- Spring 5.04 
+
+IDE- Eclipse
 
 <hr>
 
