@@ -12,9 +12,9 @@
 
 운영체제- Window8
 
-사용 언어- Java, Javascript, Html, css
+사용 언어- Java(Jdk 1.8), Javascript, Html5, css3
 
-라이브러리, 프레임워크- Jquery, Spring
+라이브러리, 프레임워크- Jquery 3.3.1, Spring 5.04
 
 IDE- 이클립스
 
