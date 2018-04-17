@@ -56,6 +56,9 @@ Insert, delete, update 처리의 경우 트랜잭션 처리를 해서 성공 시
 
 ![3](https://user-images.githubusercontent.com/32535590/38807898-21cf8e1e-41b9-11e8-9139-dcdba2930d2c.PNG)
 
+![3](https://user-images.githubusercontent.com/32535590/38859732-a245073a-4269-11e8-8120-93c7b6df347b.PNG)
+
+
 <유효성검사>
 
 제목과 비밀번호 칸이 비어있으면,  경고창이 뜸.
