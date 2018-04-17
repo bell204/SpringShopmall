@@ -133,5 +133,36 @@ public class HelpDaoImpl implements HelpDao {
 
 		return notice;
 	}
+
+	@Override
+	public ArrayList<Notice> updateDetailSelectList(Notice notice) throws HelpException {
+		ArrayList<Notice> list= null;
+		
+		list=(ArrayList) sqlSession.selectList("Notice.updateDetailSelectList", notice);
+		 
+		if (list == null) {
+			throw new HelpException("상세 문의 페이지 조회 실패");
+		}
+		
+		return list;
+	}
+
+	// update 
+	
+	@Override
+	public int updateDetailComplete(Notice notice) {
+		int result = 0;
+		result = sqlSession.update("Notice.updateDetailComplete", notice);
+		return result;		
+	}
+
+	// delete
+	
+	@Override
+	public int deleteDetail(Notice notice) {
+		int result = 0;
+		result = sqlSession.update("Notice.deleteDetail", notice);
+		return result;
+	}
 	
 }

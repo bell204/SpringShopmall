@@ -21,6 +21,9 @@ public interface HelpDao {
 	Notice comparePassword(Notice notice) throws HelpException;
 	
 	int insertHelp(SqlSessionTemplate sqlSession, Notice notice) throws HelpException;
+	int updateDetailComplete(Notice notice);
+	int deleteDetail(Notice notice);
+	ArrayList<Notice> updateDetailSelectList(Notice notice) throws HelpException;
 
 	
 

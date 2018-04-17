@@ -68,7 +68,9 @@ a{
 
 				<div class="container">
 
-					<div class="post-badges">${ Notice.NOTICE_NO }번글</div>
+					<div class="post-badges">
+					${ Notice.NOTICE_NO }번글
+					</div>
 					<h1 class="post-title">${ Notice.NOTICE_TITLE }</h1>
 
 					<div class="post-meta btn-toolbar">
@@ -82,11 +84,11 @@ a{
 					
 					<!-- 수정 삭제 -->
 					<div>
-					<p align="right"><a  href="#">수정</a> &nbsp;
-					<a align="right" href="#">삭제</a>
+					<p align="right"><a  href="updateDetailSelect.help?NOTICE_NO=${ Notice.NOTICE_NO }">수정</a> &nbsp;
+					<a align="right" href="deleteDetail.help?NOTICE_NO=${ Notice.NOTICE_NO }">삭제</a>
 					</p>
 					</div>
-					
+					  
 				</div>
 		</header>
 
@@ -102,7 +104,7 @@ a{
 	<section class="responses comments" id="responses">
 		<div class="container">
 			<div class="comments" id="comments">
-				<textarea class='ckeditor' name="content" id='editor' rows="20">
+				<textarea class='form-control autosize' name="content" id='editor' rows="20" readonly>
 					${ Notice.NOTICE_CONTENT }
 					</textarea>
 
@@ -136,11 +138,11 @@ a{
 	}
 	
 	</script>
-	
+	</c:forEach>
 	 <!--  본문 끝 --> <br>
 	<br>
  
-      </c:forEach>
+      
      <!-- 자체 댓글 기능 
 	<section class="responses comments" id="responses">
 		<div class="container">

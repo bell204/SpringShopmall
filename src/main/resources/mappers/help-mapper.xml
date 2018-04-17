@@ -85,7 +85,23 @@
 			WHERE NOTICE_NO=#{NOTICE_NO} 
 	</select>
 	
+ 	<select id="updateDetailSelectList" resultMap="noticeResultSet" parameterType="Notice">
+			SELECT * 
+			FROM NOTICE 
+			WHERE NOTICE_NO=#{NOTICE_NO} 
+	</select>
+
+	
+	<update id="updateDetailComplete">
+			UPDATE NOTICE set 
+			NOTICE_CONTENT=#{NOTICE_CONTENT}
+			WHERE NOTICE_NO=#{NOTICE_NO} 
+	</update>
  
+ 	<delete id="deleteDetail">
+			DELETE FROM NOTICE
+			WHERE NOTICE_NO=#{NOTICE_NO} 
+	</delete>
  
  
 	</mapper>

@@ -28,5 +28,11 @@ public interface HelpService {
 
 	int insertHelp(Notice notice) throws HelpException;
 
+	ArrayList<Notice> updateDetailSelectList(Notice notice) throws HelpException;
+
+	int updateDetailComplete(Notice notice);
+
+	int deleteDetail(Notice notice);
+
 
 }

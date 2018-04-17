@@ -130,4 +130,51 @@ public class HelpServiceImpl implements HelpService {
 		return hd.comparePassword(notice);
 	}
 
+	@Override
+	public ArrayList<Notice> updateDetailSelectList(Notice notice) throws HelpException {
+		return hd.updateDetailSelectList(notice);
+	}
+
+	@Override
+	public int updateDetailComplete(Notice notice) {
+		int result = 0;
+
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		result = hd.updateDetailComplete(notice);
+
+		if (result > 0) {
+			transactionManager.commit(status);
+
+		} else {
+			transactionManager.rollback(status);
+		}
+
+		return result;
+		
+		
+	}
+
+	@Override
+	public int deleteDetail(Notice notice) {
+		int result = 0;
+
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		result = hd.deleteDetail(notice);
+
+		if (result > 0) {
+			transactionManager.commit(status);
+
+		} else {
+			transactionManager.rollback(status);
+		}
+
+		return result;
+	}
+
 }
