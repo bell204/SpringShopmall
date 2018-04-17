@@ -14,9 +14,9 @@
 
 사용 언어- Java(Jdk 1.8), Javascript, Html5, css3
 
-라이브러리 Jquery 3.3.1, Jackson
+라이브러리- Jquery 3.3.1, Jackson 2.9.3
 
-프레임워크 Spring 5.04 
+프레임워크- Spring 5.04 
 
 IDE- 이클립스
 
