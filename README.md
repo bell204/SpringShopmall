@@ -50,13 +50,18 @@ IDE- Eclipse
 
 <hr>
 
-<h3>트랜잭션 처리</h3>
+<h3>명시적 트랜잭션 처리</h3>
 
 ![2](https://user-images.githubusercontent.com/32535590/38807895-1f15e218-41b9-11e8-939a-63a50cc985bd.PNG)
 
-Insert, delete, update 처리의 경우 트랜잭션 처리를 해서 성공 시 commit, 실패 시 rollback을 해줌
+-TransactionDefinition 및 TransactionStatus를 이용해 트랜잭션의 시작과 커밋, 롤백을 명시적으로 처리. 
 
-스프링에서 지원하는 트랜잭션 기능을 사용할 수 있다.
+-Insert, delete, update 처리의 경우 트랜잭션 처리를 해서 성공 시 commit, 실패 시 rollback을 해줌
+
+-propagation- 기본값인 Propagation.REQUIRED사용
+
+-rollbackFor- Exception.class에서 지정한 예외가 발생하면 트랜잭션을 롤백시킨다.
+
 
 <hr>
 
